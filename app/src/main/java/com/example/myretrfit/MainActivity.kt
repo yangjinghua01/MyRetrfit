@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myretrfit.ServerCreate.wait
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,13 +35,15 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<List<App>>, t: Throwable) {
                     t.printStackTrace()
                 }
             })
         })
         var create = ServerCreate.create(AppService::class.java).getAppData()
-
+    }
+    suspend fun getDate(){
+        var appData = ServerCreate.create<AppService>().getAppData()
+        var wait = appData.wait()
     }
 }
